@@ -1,0 +1,21 @@
+<div class="conteiner">
+<ul class="items-list">
+ <li *ngFor="let educacion of educacionLista">
+   <!--<<div class="data-container">
+   a href="#"></a> 
+   <div class="logo-image-container">
+   <img 
+    class="logo-image" 
+    [src]="education.imgls"/>
+ 
+</div>
+  <div class="list-info">
+  -->
+    
+    <h3> {{educacion.nombre_carrera}} </h3>
+    <h4> {{educacion.nombre_instituto}} </h4>
+    <p> {{educacion.fecha_inicio}}  {{educacion.fecha_fin}} </p>
+    
+</li>
+</ul>
+</div>

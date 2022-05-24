@@ -1,0 +1,83 @@
+.nav-bar {
+    background-color: rgb(28, 70, 110);
+    opacity: 0.8;
+    align-items:center;
+
+}
+
+#img-AP{
+    background-color: rgb(28, 70, 110);
+    width: 10%;
+    height: 10%;
+   
+}
+
+/*.mat-card {
+    border-radius: 25px;
+    margin: 10px 10px;
+    padding: 20px;
+    border-color: blueviolet;
+    }
+
+/*.mat-card#first-card {
+    padding: 0%;
+
+}
+/*/
+
+/*.div#profile-background {
+    z-index: -1;
+}
+*/
+div#profile-background img {
+    width: 100%;
+    height: 50%;
+    opacity: 0.8;
+}
+/* social media start*/
+
+
+.sm-icons {
+  flex-direction: row;
+  align-items: center;
+  font-size: 2em;
+  float: right;
+  margin-right: 3%;
+ 
+  /*margin-right: 30px;
+  margin-top: 20px;*/
+  
+  }
+.nav-link {
+    margin-left: 30px;;
+}  
+
+.nav-link .fa-github  {
+ color: white;
+ background-color: black;
+
+}
+
+.nav-link .fa-linkedin  {
+    background-color: white;
+   }
+.nav-link .fa-user {
+    color: grey;
+    background-color: white;
+    
+}   
+
+.nav-link i:hover {
+	opacity: .5;
+	border-radius: 0;
+}
+
+
+/* !! social media query!! */
+@media only screen and (max-width: 960px) {
+  .sm-icons .nav-item {
+    padding-right: 1em;
+  }
+}
+
+/* social media ends*/

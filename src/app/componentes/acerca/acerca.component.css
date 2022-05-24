@@ -1,0 +1,25 @@
+.profile-image {
+    position: absolute;
+    z-index: 1;
+    margin-top: -100px; }
+  
+ .profile-image {
+    border-radius: 50%;
+    vertical-align: top;
+    border: 5px solid rgba(255, 255, 255, 0.2); }
+
+    #info-data {
+       display:block;
+       margin-top: 20px;
+    }
+#info-data {
+float: left;
+padding: 2%;
+}    
+
+.btn-edit {
+   float: right;
+}
+
+
+

@@ -1,0 +1,17 @@
+.logo-image {
+  width: 5%;
+  height: 5%;  
+}
+
+.item-info {
+  float: left;
+  padding: 2%;
+  }    
+  
+  .btn-edit {
+     float:right;
+  }
+
+  .btn-edit a {
+    text-decoration:none;
+  }
