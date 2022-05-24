@@ -1,124 +1,151 @@
+<!--SKILLS-->
+<div class="conteiner">
+  <div>
+    <h2> {{componente5}} </h2>
+  </div>
+<!--START: AGREGAR SKILL-->
+<!--Boton Agregar-->
+<div>
+  <button *ngIf="isUserLogged" type="button" class="mx-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalAddSkill"> AGREGAR</button>
+</div>
+</div>
+<!--headmodall-->
+<div class="modal fade" id="miModalAddSkill" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!--Modal Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"> Agregar Skill </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Modal Body-->
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="addSkill(addForm)" class="text-center border border-light p-5" id="addFormSkill">
+
+          <!-- Skill (nombre) -->
+          <label>Nombre de la Skill</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="skill_nombre" name="skill_nombre"
+            [(ngModel)]="skillNueva.skill_nombre" id="skill" required placeholder="Skill">
+
+          <!--Porcentaje Skill-->
+          <label>Porcentaje (del 5 al 100)</label>
+          <input type="number" min="5" step="5" max="100" class="form-control" class="form-control mb-4"
+            for="skill_porcentaje" name="skill_porcentaje" [(ngModel)]="skillNueva.skill_porcentaje"
+            id="skill_porcentaje" required placeholder="Valor del 5 al 100">
 
 
+          <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona"
+            [(ngModel)]="skillModificada.persona_idpersona" disabled style="display: none;" class="form-control mb-4"
+            placeholder="persona_idpersona">
 
 
+        </form>
+      </div>
+      <!--Modal Footer-->
+      <div class="modal-footer">
+        <!--<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">-->
+        <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="crearSkill()" [disabled]="addForm.invalid"  type="submit" class="btn btn-success" data-bs-dismiss="modal"> Guardar
+          cambios</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- END: AGREGAR SKILL-->
+
+<br>
+
+<!--LISTA CIRCLE PROGRESS - SKILL-->
 <div class="row">
 
   <span *ngFor="let ski of skillsLista">
+
+
+    <div class="col-sm-4 col-md-3 col-lg-3">
+
+      <circle-progress [showSubtitle]="true" [percent]="ski.skill_porcentaje" [subtitle]="ski.skill_nombre"
+        [radius]="90" [outerStrokeWidth]="7" [innerStrokeWidth]="5" [outerStrokeColor]="'rgb(28, 70, 110)'"
+        [innerStrokeColor]="'#4682B4'" [animation]="true" [animationDuration]="300"></circle-progress>
+
+
+
+      <!--EDITAR-->
+      
+      <div class="btn-edit">
+        <!--boton de editar-->
+        <a *ngIf="isUserLogged" class="btn-right" data-bs-toggle="modal" data-bs-target="#miModalEditSkill" (click)="recuSkill(ski.idskill)"
+          class="btn-right"><i class="fa fa-pen" id="edit"></i></a>
+      </div>
+      <!--headmodall-->
+      <div class="modal fade" id="miModalEditSkill" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <!--Modal Header-->
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitle"> Editar Skill </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--Modal Body-->
+            <div class="modal-body">
+              <form #editForm="ngForm" (ngSubmit)="editSkill(editForm)" class="text-center border border-light p-5">
+
+                <!-- Skill (nombre) -->
+                <label>Nombre de la Skill</label>
+                <input type="text" class="form-control" class="form-control mb-4" for="skill_nombre" name="skill_nombre"
+                  [(ngModel)]="skillModificada.skill_nombre" id="skill_nombre" 
+                  maxlength="17"
+                  required placeholder="Skill">
+                  
+                <!--Porcentaje Skill-->
+                <label>Porcentaje</label>
+                <input type="number" min="5" step="5" max="100" class="form-control" class="form-control mb-4"
+                  for="skill_porcentaje" name="skill_porcentaje" [(ngModel)]="skillModificada.skill_porcentaje"
+                  maxlength="3"
+                  id="skill_porcentaje" required placeholder="skill_porcentaje">
+
+
+
+                <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona"
+                  [(ngModel)]="skillModificada.persona_idpersona" disabled style="display: none;"
+                  class="form-control mb-4" placeholder="persona_idpersona">
+
+
+              </form>
+            </div>
+            <!--Modal Footer-->
+            <div class="modal-footer">
   
- 
+              <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button (click)="modificarSkill(skillModificada.idskill)" [disabled]="editForm.invalid"  type="submit" class="btn btn-success"
+                data-bs-dismiss="modal"> Guardar cambios</button>
 
-  <div class="col-sm-4 col-md-3 col-lg-3">
-    <!--<h2> {{ski.skills_nombre}} </h2>-->
-    
-    <circle-progress 
-    [showSubtitle]="true"
-    [percent]="ski.skills_porcentaje"
-    [subtitle]="ski.skills_nombre"
-    
-    [radius]="90"
-    [outerStrokeWidth]="6"
-    [innerStrokeWidth]="4"
-    [outerStrokeColor]="'rgb(28, 70, 110)'"
-    [innerStrokeColor]="'#4682B4'"
-    [animation]="true"
-    [animationDuration]="300"
-  ></circle-progress>
- 
-</div>
-</span>
-<!--
-  <div class="col-sm-4 col-md-3 col-lg-3">
-    <circle-progress 
-      [percent]="85"
-      [radius]="75"
-      [outerStrokeWidth]="6"
-      [innerStrokeWidth]="4"
-      [outerStrokeColor]="'#78C000'"
-      [innerStrokeColor]="'#C7E596'"
-      [animation]="true"
-      [animationDuration]="300"
-    ></circle-progress>
-  </div>
+            </div>
 
-  <div class="col-sm-4 col-md-3 col-lg-3">
-      <circle-progress 
-        [percent]="85"
-        [radius]="75"
-        [outerStrokeWidth]="6"
-        [innerStrokeWidth]="4"
-        [outerStrokeColor]="'#78C000'"
-        [innerStrokeColor]="'#C7E596'"
-        [animation]="true"
-        [animationDuration]="300"
-      ></circle-progress>
-  </div>
+          </div>
+        </div>
+      </div>
 
-  <div class="col-sm-4 col-md-3 col-lg-3">
-        <circle-progress 
-          [percent]="85"
-          [radius]="75"
-          [outerStrokeWidth]="6"
-          [innerStrokeWidth]="4"
-          [outerStrokeColor]="'#78C000'"
-          [innerStrokeColor]="'#C7E596'"
-          [animation]="true"
-          [animationDuration]="300"
-        ></circle-progress>
-  </div>
 
-  <div class="col-sm-4 col-md-3 col-lg-3">
-    <circle-progress 
-      [percent]="85"
-      [radius]="75"
-      [outerStrokeWidth]="6"
-      [innerStrokeWidth]="4"
-      [outerStrokeColor]="'#78C000'"
-      [innerStrokeColor]="'#C7E596'"
-      [animation]="true"
-      [animationDuration]="300"
-    ></circle-progress>
-  </div>
+      <!--END: EDITAR-->
 
-  <div class="col-sm-4 col-md-3 col-lg-3">
-    <circle-progress 
-      [percent]="85"
-      [radius]="75"
-      [outerStrokeWidth]="6"
-      [innerStrokeWidth]="4"
-      [outerStrokeColor]="'#78C000'"
-      [innerStrokeColor]="'#C7E596'"
-      [animation]="true"
-      [animationDuration]="300"
-  ></circle-progress>
-  </div>
+      <!--START: ELIMINAR SKILL-->
 
-  <div class="col-sm-4 col-md-3 col-lg-3">
-    <circle-progress 
-      [percent]="85"
-      [radius]="75"
-      [outerStrokeWidth]="6"
-      [innerStrokeWidth]="4"
-      [outerStrokeColor]="'#78C000'"
-      [innerStrokeColor]="'#C7E596'"
-      [animation]="true"
-      [animationDuration]="300"
-  ></circle-progress>
-  </div>
+      <div class="btn-edit">
+        <a *ngIf="isUserLogged" class="btn-right" (click)="borrarSkill(ski.idskill)"><i class="fa fa-trash" id="delete"></i> </a>
+        <!--<button class="btn btn-danger" (click)="(borrarExperiencia)"> Eliminar </button> -->
+      </div>
 
-  <div class="col-sm-4 col-md-3 col-lg-3">
-    <circle-progress 
-      [percent]="85"
-      [radius]="75"
-      [outerStrokeWidth]="6"
-      [innerStrokeWidth]="4"
-      [outerStrokeColor]="'#78C000'"
-      [innerStrokeColor]="'#C7E596'"
-      [animation]="true"
-      [animationDuration]="300"
-  ></circle-progress>
-  </div>
--->
+      <!-- FINISH: ELIMINAR SKILL-->
+
+
+
+    </div>
+  </span>
 
 </div>
-

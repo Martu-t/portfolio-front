@@ -1,55 +1,34 @@
-.nav-bar {
-    background-color: rgb(28, 70, 110);
-    opacity: 0.8;
-    align-items:center;
 
+.fondo-nav-bar {
+  background-color: rgb(28, 70, 110);
+  opacity: 0.8;
 }
+
+
+ .nav-bar {
+    align-items:center;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: auto;
+} 
 
 #img-AP{
-    background-color: rgb(28, 70, 110);
-    width: 10%;
-    height: 10%;
-   
+  background-color: rgb(28, 70, 110);
+  max-height: 90px;
 }
-
-/*.mat-card {
-    border-radius: 25px;
-    margin: 10px 10px;
-    padding: 20px;
-    border-color: blueviolet;
-    }
-
-/*.mat-card#first-card {
-    padding: 0%;
-
-}
-/*/
-
-/*.div#profile-background {
-    z-index: -1;
-}
-*/
-div#profile-background img {
-    width: 100%;
-    height: 50%;
-    opacity: 0.8;
-}
-/* social media start*/
-
 
 .sm-icons {
   flex-direction: row;
   align-items: center;
   font-size: 2em;
   float: right;
-  margin-right: 3%;
- 
-  /*margin-right: 30px;
-  margin-top: 20px;*/
-  
-  }
+}
+
+
 .nav-link {
-    margin-left: 30px;;
+    margin: 0 10px;
+    padding: auto auto;
 }  
 
 .nav-link .fa-github  {
@@ -60,24 +39,45 @@ div#profile-background img {
 
 .nav-link .fa-linkedin  {
     background-color: white;
-   }
+}
+
 .nav-link .fa-user {
     color: grey;
     background-color: white;
-    
 }   
 
 .nav-link i:hover {
 	opacity: .5;
 	border-radius: 0;
+} 
+
+.fa-user-check {
+  color:  rgb(14, 97, 79);
+  background-color: white;
+  font-size: medium;
+}   
+
+.fa-sign-out {
+  color: rgb(92, 9, 9);
 }
 
-
 /* !! social media query!! */
-@media only screen and (max-width: 960px) {
-  .sm-icons .nav-item {
-    padding-right: 1em;
+@media only screen and (max-width: 340px) {
+  
+  .nav-bar{
+    display: block;
+    text-align: center;
   }
+  
+  .bottom-nav-bar {
+      align-items: center;
+      float: right;
+      background-color: #15243c;
+      justify-content:space-evenly;
+      min-width: 100%;
+      
+    }
+
 }
 
 /* social media ends*/

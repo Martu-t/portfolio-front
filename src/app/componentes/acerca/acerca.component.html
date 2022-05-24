@@ -1,48 +1,128 @@
-   <!-- START: PONER INFO RELEVANTE -->
+
+<div class="card">
+<!--Banner-->
+<div class="card-img-top"  id="profile-background">
+  <img [src]="personaLista.url_banner"> 
+</div>
+
+
+<!-- START: INFO RELEVANTE -->
 <div>
-    <div id="info" style="padding: 16px;">
-        <div class="container">
-        <img class="profile-image" src="../../../assets/images/profile_photo.jpg "
-         width="150" height="150">
+  <div id="info">
+    <div class="container">
+      <img class="profile-image" [src]="personaLista?.url_foto" width="150" height="150">
+    </div>
+    <br>
+    <div class="container">
+      <div id="info-data">
+
+
+        <h2> {{personaLista.nombre}} {{personaLista.apellido}} </h2>
+        <!--boton de editar-->
+        <div class="btn-edit">
+         
+          <a *ngIf="isUserLogged" href="#" type="button" class="fa fa-pen" data-bs-toggle="modal" data-bs-target="#miModaleditPersona"
+          (click)="recuPersona(personaLista.idpersona)"></a>
+        </div>
+        <h4> {{personaLista.residencia}} </h4>
+       <!-- <h4> {{personaLista.fecha_nacimiento}} </h4> -->
+
+        <div id="info-company"> </div>
+        <div id="info-contacto"></div>
+        <h4> {{personaLista.telefono}} </h4>
+        <h4> {{personaLista.email}} </h4>
+        <p> {{personaLista.sobre_mi}} </p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- FINISH: INFO RELEVANTE -->
+
+<!--START: EDITAR-->
+
+<!--headmodall-->
+<div class="modal fade" id="miModaleditPersona" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <!--Modal Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"> Editar datos personales </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Modal Body-->
+      <div class="modal-body">
+        <form #editForm="ngForm" (ngSubmit)="editPersona(editForm)">
+
+          <!--id para pasar-->
+          <input type="hidden" ngModel={{personaNueva.idpersona}} name="idpersona"
+          class="form-control">
+
+          <!-- Nombre Persona -->
+          <label>Nombre/s</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="nombre" name="nombre"
+               [(ngModel)]="personaNueva.nombre" id="nombre_persona" #nombre="ngModel" required placeholder="Tu nombre">
+         
+            <!--Apellido-->
+          <label>Apellido/s</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="apellido" name="apellido"
+                [(ngModel)]="personaNueva.apellido" id="apellido" required placeholder="apellido">
+
+          <!-- Residencia -->
+          <label>Lugar de residencia</label>
+          <input type="text" class="form-control mb-4" class="form-control" name="residencia" id="residencia"
+            [(ngModel)]="personaNueva.residencia" required>
+          <br>
+
+          <!-- Fecha de nacimiento -->
+          <label>Fecha de nacimiento</label>
+          <input type="date" class="form-control mb-4" class="form-control" name="fecha_nac" id="fecha_nac"
+             [(ngModel)]="personaNueva.fecha_nacimiento" required min="1931-01-01">
+          <br>
+
+          <!--Telefono-->
+          <label>Teléfono</label>
+          <input type="number" class="form-control" class="form-control mb-4" for="tel" name="tel"
+            [(ngModel)]="personaNueva.telefono" id="telefono" required size="12" placeholder="Telefono">
+
+          <!-- Email -->
+          <label>Email</label>
+          <input type="email" class="form-control validate" class="form-control mb-4" for="email" name="email"
+            pattern=".+@.+\.com" size="30" [(ngModel)]="personaNueva.email" id="email" required
+            placeholder="email@ejemplo.com">
+
+          <!-- Descripcion -->
+          <label>Descripción de tu perfil</label>
+          <div class="form-group">
+            <textarea class="form-control rounded-0" name="descripcion_persona" id="descripcion_persona" rows="3"
+              [(ngModel)]="personaNueva.sobre_mi" required placeholder="Conta sobre vos"></textarea>
           </div>
           <br>
-          <div class="conteiner">
-        <div id="info-data"> 
 
-            <!--<li *ngFor="let i of personaLista"> --> 
-              <h3> {{personaLista.nombre}} {{personaLista.apellido}} </h3>
-              <div class="btn-edit">
-                <a href="#" class="btn-right"><i class="fa fa-pen"></i> </a>
-                </div> 
-              <h3> {{personaLista.residencia}} </h3>
-              <h3> {{personaLista.fecha_nacimiento}} </h3>
-              <h3> {{personaLista.sobre_mi}} </h3>
+          <!-- FOTO perfil -->
+          <label for="url_foto">Forto de Perfil</label>
+          <input type="text" class="form-control" class="form-control mb-4" [(ngModel)]="personaNueva.url_foto" required
+            name="url_foto" id="url_foto">
 
-            <!-- </li> --> 
-          
-
-            <div id="info-company">  </div>
-            <span><a href=#> Informacion de contacto</a> </span>
-            <div id="info-contacto" ></div>
-            <h3> {{personaLista.telefono}} </h3>
-            <h3> {{personaLista.email}} </h3>
-            <span></span>
-            <br>
-           
-          </div>
-          </div>
+          <!-- FOTO Banner-->
+          <label for="url_banner">Baner</label>
+          <input type="text" class="form-control" class="form-control mb-4" [(ngModel)]="personaNueva.url_banner"
+            required name="url_banner" id="url_banner">
+        </form>
       </div>
+      <!--Modal Footer-->
+      <div class="modal-footer">
+        <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="modificarPersona(personaNueva.idpersona)" [disabled]="editForm.invalid" type="submit"
+          class="btn btn-success" data-bs-dismiss="modal"> Editar</button>
+      </div>
+    </div>
+  </div>
 </div>
-<!-- FINISH: PONER INFO RELEVANTE -->
 
-<!--ACA ESTA EL FORMULARIO-->
-<!--
-<div class="container">
-<form class="form-group row">
-<div class="form-group col -md -3">
-<label for="nombre">Nombre:</label>
-<input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-contol">
-</div>
-</form> 
-</div>
--->
+
+<!--FORMULARIO TERMINA-->
+
+
+<!--END: EDITAR-->

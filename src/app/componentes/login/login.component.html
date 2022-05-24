@@ -1,0 +1,70 @@
+<section class="vh-100 gradient-custom">
+  <div class="container py-5 h-100">
+    
+
+  
+    <div class="row d-flex justify-content-center align-items-center h-100">
+
+      <nav class="nav-bar">
+        <img id="img-AP" src="assets/images/APLogo.png">
+      </nav>
+
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
+
+
+
+            <div class="mb-md-3 mt-md-3 pb-3">
+
+              <h2 class="fw-bold mb-2 text-uppercase">Iniciar Sesión</h2>
+              <p class="text-white-50 mb-5">Debes iniciar sesión para poder editar el portfolio</p>
+
+              <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="nombre">Usuario</label>
+                  <input type="text" name="nombre" formControlName="nombre" id="nombre"
+                  [ngClass]="{'is-invalid': nombre?.errors && nombre?.touched}"
+                    class="form-control form-control-lg" required minlength="4" />
+                </div>
+
+                <div *ngIf="nombre?.errors && nombre?.touched">
+                  <p *ngIf="nombre?.hasError('required')" class="text-danger">
+                    Debes ingresar un nombre de usuario
+                  </p>
+                  <p *ngIf="nombre?.hasError('minlength')" class="text-danger">
+                    El usuario debe tener al menos 4 caracteres
+                  </p>
+                </div>
+
+
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="password">Contraseña</label>
+                  <input type="password" id="password" name="password" formControlName="password"
+                  [ngClass]="{'is-invalid': password?.errors && password?.touched}"
+                    class="form-control form-control-lg" required minlength="5"  />
+                </div>
+                <div *ngIf="password?.errors && password?.touched">
+                  <p *ngIf="password?.hasError('required')" class="text-danger">
+                    Debes ingresar una contraseña
+                  </p>
+                  <p *ngIf="password?.hasError('minlength')" class="text-danger">
+                    La contraseña debe tener al menos 5 caracteres
+                  </p>
+                </div>
+
+                <button type="submit" [disabled]="form.invalid" type="submit"
+                  class="btn btn-outline-light btn-lg px-5">Login</button>
+                  
+                  <div *ngIf="loginError" class="text-danger" style="margin-top: 5%;">Los datos ingresados no son válidos. <br>Ingrese nuevas credenciales y haga click en 'Login'</div>
+                  
+
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+.experiencia, .educacion, .skills, .proyectos {
+    padding: 20px 25px;    
+}
+
+.proyectos {
+    margin-bottom: 6%;
+}
+
+.contenedor-global {
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+
+}
+
+/* Rounded border */
+hr.rounded {
+    border-top: 8px solid rgb(43, 8, 124);
+    border-radius: 5px;
+    
+  }
+
+  .footer {
+    background-color: rgb(28, 70, 110);
+    opacity: 0.8;
+    padding: 15px 0;
+  }
+
+  p {
+      color: blanchedalmond;
+      text-align: center;
+  }

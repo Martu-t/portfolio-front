@@ -1,83 +1,208 @@
-<div>
-            <div class="data-container">
-                <div class="item-info">
-                    <div>
+<!-- START EXPERIENCIA-->
+<br>
+<div class="conteiner">
+  <div>
+    <h2> {{componente3}} </h2>
+  </div>
 
-                        <span *ngFor="let i of experienciaLista"> 
-                        <!-- <h4 *ngSwitchCase="1"> -->
-                        <h3>  {{i.nombre_empresa}} </h3> 
-                    <!--Botones de accion start -->
-                            <div class="btn-edit">
-                            
-<!--Formulario para agregar-->
-<div class="w3-container">
-   
-  <a onclick="document.getElementById('id01').style.display='block'" class="btn-right"><i class="fa fa-plus" id="add"></i></a>
-  
+  <!--START: AGREGAR EXPERIENCIA-->
+  <!--Boton Agregar-->
+  <div>
+    <button *ngIf="isUserLogged" type="button" class="mx-4 btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalAddExp"> AGREGAR</button>
+  </div>
+</div>
 
-  <div id="id01" class="w3-modal">
-    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
 
-      <div class="w3-center"><br>
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+<!--headmodall-->
+<div class="modal fade" id="miModalAddExp" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!--Modal Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"> Agrega una experiencia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Modal Body-->
+      <div class="modal-body">
+        <form #editForm="ngForm" (ngSubmit)="editExp(editForm)"class="text-center border border-light p-5">
+
+          <!-- Nombre Empresa -->
+          <label>Nombre de la empresa</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="nombre_empresa" name="nombre_empresa"
+            [(ngModel)]="experienciaNueva.nombre_empresa" id="nombre_empresa" required>
+
+          <!--Puesto-->
+          <label>Puesto</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="puesto" name="puesto"
+            [(ngModel)]="experienciaNueva.puesto" id="puesto" required>
+
+          <!-- Fecha inicio -->
+          <label>Fecha de Inicio</label>
+          <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="form-control mb-4" class="form-control"
+            name="fecha_inicio" id="fecha_inicio" [(ngModel)]="experienciaNueva.fecha_inicio" min="1960-01-01" [max]="experienciaNueva.fecha_fin">
+          <br>
+          <!-- Fecha fin -->
+          <label>Fecha de fin</label>
+          <input type="date" class="form-control mb-4" class="form-control" name="fecha_fin" id="fecha_fin"
+            [(ngModel)]="experienciaNueva.fecha_fin" [min]="experienciaNueva.fecha_inicio">
+          <br>
+          <!-- Descripcion -->
+          <label>Descripción de tareas</label>
+          <div class="form-group">
+            <textarea class="form-control rounded-0" name="descripcion_experiencia" id="descripcion_experiencia"
+              rows="3"  [(ngModel)]="experienciaNueva.descripcion_experiencia"
+              maxlength="4500"  
+              placeholder="Descripcion de tareas"></textarea>
+          </div>
+          <!-- <br>
+          <input type="number" for="tipo_empleo_idtipo_empleo" name="tipo_empleo_idtipo_empleo"
+            [(ngModel)]="experienciaNueva.tipo_empleo_idtipo_empleo" id="tipo_empleo_idtipo_empleo"
+            class="form-control mb-4" placeholder="tipo_empleo_idtipo_empleo" disabled style="display: none"> -->
+
+          <!--idpersona-->
+          <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona"
+            [(ngModel)]="experienciaNueva.persona_idpersona" disabled style="display: none;" class="form-control mb-4"
+            placeholder="persona_idpersona">
+
+
+        </form>
+      </div>
+      <!--Modal Footer-->
+      <div class="modal-footer">
+        <!--<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">-->
+        <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="crearExperiencia()" [disabled]="editForm.invalid"  type="submit" class="btn btn-success" data-bs-dismiss="modal"> Agregar
+          Experienica</button>
 
       </div>
 
-      <!--formulario-->
-      <div>
-        <form action="/http://localhost:8080/new/experiencia" method="post" class="text-center border border-light p-5">
-            <p>Agregar Experiencia</p>
-            <!-- Nombre Empresa -->
-            <input type="text" name="nombre_empresa" id="nombre_empresa" class="form-control mb-4" placeholder="Nombre de la Empresa">
-            <!-- Puesto-->
-            <input type="text" name="puesto" id="puesto" class="form-control mb-4" placeholder="Puesto">
-            <!-- Fecha inicio -->
-            <input type="date" name="fecha_inicio" id="fecha_inicio" class="form-control mb-4" min="1960-01-01">
-            <!-- Fecha fin -->
-            <input type="date" name="fecha_fin" id="fecha_fin" class="form-control mb-4" min="1961-01-01">
-            <!-- Descripcion -->
-            <div class="form-group">
-              <textarea class="form-control rounded-0" name="descripcion_experiencia" id="descripcion_experiencia" rows="3"
-                placeholder="Descripcion de tareas"></textarea>
-            </div>
-            <br>
-            <input type="number" name="tipo_empleo_idtipo_empleo" id="tipo_empleo_idtipo_empleo" class="form-control mb-4" placeholder="tipo_empleo_idtipo_empleo">
-            <input type="number" name="persona_idpersona" id="persona_idpersona" class="form-control mb-4" placeholder="persona_idpersona">
-         
-
-                <!--Especificacion-->
-      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
-        <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-left w3-button w3-red">Cancelar</button>
-        <input type="submit" value="Agregar" class="w3-right w3-button w3-green">  
-       <!--<span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>--> 
-     
-      </div>    
-
-        </form>
-        
-
-    </div>
     </div>
   </div>
 </div>
 
-<!--Siguiente botton-->
-<!--Agregar-->
-                            
-                            <a href="#" class="btn-right"><i class="fa fa-pen" id="edit"></i> </a>    
-                            <a href="#" class="btn-right"><i class="fa fa-trash" id="delete"></i> </a>     
-                        </div> 
-                    <!--Botton de edicion finish-->
+<!--FORMULARIO DE PRUEBA TERMINA-->
+
+<br>
+<br>
+
+<!---FINISH: AGREGAR EXPERIENCIA-->
+<div class="data-container">
+
+  <div class="item-info">
+    <div>
+      
+       <!--Start: Lista de experiencias-->
+      <div *ngFor="let i of experienciaLista">
+
+        <div class="titulo-boton">
+          <h3> {{i.nombre_empresa}} </h3>
+          <!--START: EDITAR EXPERIENCIA-->
+          <!--boton editar-->
+          <div class="btn-edit">
+            <a *ngIf="isUserLogged" class="btn-right" data-bs-toggle="modal" data-bs-target="#miModalEditExp"
+              (click)="recuExperiencia(i.idexperiencia_laboral)" class="btn-right"><i class="fa fa-pen" id="edit"></i></a>
+          </div>
+          <!--Modal para editar-->
+          <!--headmodall-->
+          <div class="modal fade" id="miModalEditExp" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+            data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+              <div class="modal-content">
+                <!--Modal Header-->
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalTitle"> Modificar Experiencia </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!--Modal Body-->
+                <div class="modal-body">
+
+                  <!--form-->
+                  <form #editForm="ngForm" (ngSubmit)="editExp(editForm)" class="text-center border border-light p-5">
+                    <!--id para pasar-->
+                    <input type="hidden" ngModel={{experienciaModificada.idexperiencia_laboral}}
+                      name="idexperiencia_laboral" class="form-control">
+                    <div>
+                      <label>Nombre de la empresa</label>
+                      <input type="text" class="form-control" class="form-control mb-4" for="nombre_empresamodificada"
+                        name="nombre_empresa_modificada" [(ngModel)]="experienciaModificada.nombre_empresa"
+                        id="nombre_empresa_modificada" required placeholder="Nombre de la Empresa">
+                    </div>
+
+                    <!--Puesto-->
+                    <div>
+                      <label>Puesto</label>
+                      <input type="text" class="form-control" class="form-control mb-4" for="puesto_modificado"
+                        name="puesto_modificado" [(ngModel)]="experienciaModificada.puesto" id="puesto_modificado"
+                        required placeholder="Puesto">
+                    </div>
+
+                    <!-- Fecha inicio -->
+                    <div>
+                      <label>Fecha de inicio</label>
+                      <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="form-control mb-4"
+                        class="form-control" name="fecha_inicio" id="fecha_inicio" required
+                        [(ngModel)]="experienciaModificada.fecha_inicio" min="1960-01-01" [max]="experienciaModificada.fecha_fin" >
+                    </div>
+                    <br>
+
+                    <!-- Fecha fin -->
+                    <div>
+                      <label>Fecha de fin</label>
+                      <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="form-control mb-4"
+                        class="form-control" name="fecha_fin" id="fecha_fin" [(ngModel)]="experienciaModificada.fecha_fin"
+                        [min]="experienciaModificada.fecha_inicio">
+                    </div>
+                    <br>
+                    <!-- Descripcion -->
+                    <div class="form-group">
+                      <label>Escribí una breve descripción de las tareas</label>
+                      <textarea class="form-control rounded-0" name="descripcion_experiencia"
+                        id="descripcion_experiencia1" rows="3" [(ngModel)]="experienciaModificada.descripcion_experiencia"
+                        minlength="2"
+                        placeholder="Descripcion de tareas"></textarea>
+                    </div>
                     
-                        <h4> {{i.puesto}} </h4>
-                        <h6> {{i.fecha_inicio}} - {{i.fecha_fin }} </h6>
-                        <p> {{i.descripcion_experiencia }} </p>
-                        <br>
-                    <!--
-                    </ng-container>-->
-                        </span>
-                        </div>
+                    <!-- <input type="number" for="tipo_empleo_idtipo_empleo" name="tipo_empleo_idtipo_empleo"
+                      [(ngModel)]="experienciaModificada.tipo_empleo_idtipo_empleo" id="tipo_empleo_idtipo_empleo1"
+                      class="form-control mb-4" placeholder="tipo_empleo_idtipo_empleo" disabled style="display: none"> -->
 
-</div>
-</div>
 
+                    <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona1"
+                      [(ngModel)]="experienciaModificada.persona_idpersona" class="form-control mb-4"
+                      placeholder="persona_idpersona" disabled style="display: none">
+
+
+                  </form>
+                </div>
+
+                <!--Modal Footer-->
+
+                <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                <button (click)="modificarExperiencia(experienciaModificada.idexperiencia_laboral)" [disabled]="editForm.invalid" type="submit"
+                  class="btn btn-success" data-bs-dismiss="modal"> Editar Experiencia</button>
+
+              </div>
+
+            </div>
+          </div>
+          <!--FINISH: EDITAR EXPERIENCIA-->
+          
+          <!--START: ELIMINAR EXPERIENCIA-->
+          <!--boton eliminar-->
+          <div class="btn-edit">
+            <a *ngIf="isUserLogged" class="btn-right" (click)="borrarExperiencia(i.idexperiencia_laboral)"><i class="fa fa-trash"
+                id="delete"></i> </a>
+                
+          </div>
+          <!-- FINISH: ELIMINAR EXPERIENCIA-->
+        </div>    
+
+        <h4> {{i.puesto}} </h4>
+        <h6> {{i.fecha_inicio | date: 'MMM-yyyy' }} - {{i.fecha_fin | date: 'MMM-yyyy'  }} </h6>
+        <p> {{i.descripcion_experiencia }} </p>
+
+      </div>
+    </div>
+    <!--End: Lista de experiencias-->
+  </div>

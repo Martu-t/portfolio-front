@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,8 +13,10 @@ import { PorfolioService } from './servicios/porfolio.service';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
+import { LoginComponent } from './componentes/login/login.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
 
 
 
@@ -28,14 +30,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EducacionComponent,
     SkillsComponent,
     ProyectosComponent,
-    IniciarSesionComponent,
+    LoginComponent,
+    PortfolioComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-   
+    FormsModule,
+    ReactiveFormsModule,
+
     NgbModule,
     
     NgCircleProgressModule.forRoot({
@@ -45,6 +50,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       outerStrokeColor: "#78C000",
       innerStrokeColor: "#C7E596",
       animationDuration: 300,
+      titleFontSize: "15",
+      subtitleFontSize: "20",
+      subtitleColor:"rgb(28, 70, 110)"
       
       //subtitle: 'ACA VA ALGO',
 
