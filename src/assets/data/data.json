@@ -1,0 +1,51 @@
+{
+    "name": "Martha Tarantino",
+    "backImage": "https://successfulresumes.co.nz/wp-content/uploads/2021/01/Soft-blue-Linkedin-banner.png?x55547",
+    "position": "Web developer",
+    "company": {
+        "name": "Nombre de la empresa"
+    },
+    "school": {
+        "name": "Universidad Argentina de la empresa"
+    },
+    "ubication": "Buenos Aires (Argentina)",
+    "about": "Licenciada en comex y programadora",
+    "experience": [{
+        "position": "Administrator",
+        "company": "MODE Projects",
+        "start": "July 2021",
+        "end": "Presente",
+        "timeElapsed": "7 meses"
+    }],
+    "education": [{
+        "school": "Escuela 1",
+        "title": "Licenciada",
+        "img": "https://www.universidades.com.ar/logos/original/logo-universidad-argentina-de-la-empresa.png",
+        "career": "Comercio internacional",
+        "score": 0,
+        "start": 2019,
+        "end": 2022
+
+    },
+    {
+        "school": "Escuela 2",
+        "title": "Titulo obtenido 2",
+        "career": "Carrera 2",
+        "score": 82,
+        "start": 2014,
+        "end": 2018   
+    },
+    {
+        "school": "Escuela 3",
+        "title": "Titulo obtenido 3",
+        "career": "Carrera 3",
+        "score": 0,
+        "start": 2012,
+        "end": 2014   
+    }
+],
+"aptitudes": [{
+    "name":"Resolver probleamas",
+    "progress": 75
+}]
+}

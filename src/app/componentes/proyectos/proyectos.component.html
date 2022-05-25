@@ -1,0 +1,152 @@
+<!--PROYECTOS-->
+<div class="conteiner" id="proyectos">
+  <div>
+    <h2> {{componente6}} </h2>
+  </div>
+<!--START: AGREGAR PROYECT0-->
+<!--Boton Agregar-->
+<div>
+  <button *ngIf="isUserLogged" type="button" class="mx-5 btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalAddProyecto">AGREGAR </button>
+</div>
+</div>
+<!--headmodall-->
+<div class="modal fade" id="miModalAddProyecto" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!--Modal Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"> Agregar Proyecto </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Modal Body-->
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="addProyecto(addForm)" class="text-center border border-light p-5">
+
+          <!-- proyecto (nombre) -->
+          <label>Nombre del Proyecto</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="proyecto_nombre" name="proyecto_nombre"
+            [(ngModel)]="proyectoNuevo.proyecto_nombre" id="proyecto" required>
+
+          <!-- Descripcion -->
+          <label for="url_proyecto">Escribí una breve descripción de tu proyecto</label>
+          <div class="form-group">
+            <textarea class="form-control rounded-0" name="descripcion" id="descripcion" rows="3"
+              [(ngModel)]="proyectoNuevo.descripcion" required
+              placeholder="Podes agregar: &#10;objectivos, tecnologias, etc"></textarea>
+          </div>
+          <br>
+
+          <!--URL al proyecto-->
+          <label for="url_proyecto">Ingresa el link de tu proyecto</label>
+          <input type="text" class="form-control" class="form-control mb-4" [(ngModel)]="proyectoNuevo.url_proyecto"
+          required
+            name="url_proyecto" id="url_proyecto">
+          <!-- ID persona -->
+          <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona"
+            [(ngModel)]="proyectoNuevo.persona_idpersona" disabled style="display: none;" class="form-control mb-4"
+            placeholder="persona_idpersona">
+
+
+        </form>
+      </div>
+      <!--Modal Footer-->
+      <div class="modal-footer">
+        
+        <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button  (click)="crearProyecto()" [disabled]="addForm.invalid" type="submit" class="btn btn-success" data-bs-dismiss="modal"> Guardar
+          cambios</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--FORMULARIO AGREGAR PROYECTO TERMINA-->
+
+
+<div>
+  <div class="container">
+    <span *ngFor="let i of proyectosLista">
+
+      <!--START EDITAR PROYECTO -->
+      
+      <div class="btn-edit">
+        <!--boton de editar-->
+        <a *ngIf="isUserLogged" class="btn-right" data-bs-toggle="modal" data-bs-target="#miModalEditProyecto"
+          (click)="recuProyecto(i.idproyecto)" class="btn-right"><i class="fa fa-pen" id="edit-proyecto"></i></a>
+      </div>
+      <!--headmodall-->
+      <div class="modal fade" id="miModalEditProyecto" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <!--Modal Header-->
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitle"> Agregar Proyecto </h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!--Modal Body-->
+            <div class="modal-body">
+              <form #editForm="ngForm" (ngSubmit)="editProyecto(editForm)" class="text-center border border-light p-5">
+
+                <!-- proyecto (nombre) -->
+                <label>Nombre del Proyecto</label>
+                <input type="text" class="form-control" class="form-control mb-4" for="proyecto_nombre"
+                  name="proyecto_nombre" [(ngModel)]="proyectoModificado.proyecto_nombre" id="proyecto" required>
+
+                <!-- Descripcion -->
+                <label for="url_proyecto">Escribí una breve descripción de tu proyecto</label>
+                <div class="form-group">
+                  <textarea class="form-control rounded-0" name="descripcion" id="descripcion" rows="3"
+                    [(ngModel)]="proyectoModificado.descripcion" required
+                    placeholder="Podes agregar &#10;objectivos, tecnologias, etc"></textarea>
+                </div>
+                <br>
+
+                <!--URL al proyecto-->
+                <label for="url_proyecto">Ingresa el link de tu proyecto</label>
+                <input type="text" class="form-control" class="form-control mb-4" 
+                  [(ngModel)]="proyectoModificado.url_proyecto" name="url_proyecto" id="url_proyecto">
+                <!-- ID persona -->
+                <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona"
+                  [(ngModel)]="proyectoModificado.persona_idpersona" disabled style="display: none;"
+                  class="form-control mb-4" required placeholder="persona_idpersona">
+
+
+              </form>
+            </div>
+            <!--Modal Footer-->
+            <div class="modal-footer">
+       
+              <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button (click)="modificarProyecto(proyectoModificado.idproyecto)" [disabled]="editForm.invalid" type="submit" class="btn btn-success"
+                data-bs-dismiss="modal"> Guardar Proyecto</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!--Termina formulario de modificar proyecto-->
+      <!--END: EDITAR PROYECTO -->
+      
+      <!--START: Eliminar PROYECTO-->
+      <!--BOTON ELIMINAR-->
+      <div class="btn-edit">
+        <a *ngIf="isUserLogged" class="btn-right" (click)="borrarProyecto(i.idproyecto)"><i class="fa fa-trash" id="delete"></i> </a>
+      </div>
+      <!-- FINISH: ELIMINAR  PROYECTO-->
+
+
+      <!--LISTA DE PROYECTOS-->
+      <div class="proyectos">
+        <p id="proyecto-titulo"><a target="_blank" href={{i.url_proyecto}}> {{i.proyecto_nombre}}</a></p>
+        <p>{{i.descripcion}}</p>
+        
+      </div>
+
+    </span>
+  </div>

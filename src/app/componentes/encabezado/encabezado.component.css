@@ -1,0 +1,83 @@
+
+.fondo-nav-bar {
+  background-color: rgb(28, 70, 110);
+  opacity: 0.8;
+}
+
+
+ .nav-bar {
+    align-items:center;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: auto;
+} 
+
+#img-AP{
+  background-color: rgb(28, 70, 110);
+  max-height: 90px;
+}
+
+.sm-icons {
+  flex-direction: row;
+  align-items: center;
+  font-size: 2em;
+  float: right;
+}
+
+
+.nav-link {
+    margin: 0 10px;
+    padding: auto auto;
+}  
+
+.nav-link .fa-github  {
+ color: white;
+ background-color: black;
+
+}
+
+.nav-link .fa-linkedin  {
+    background-color: white;
+}
+
+.nav-link .fa-user {
+    color: grey;
+    background-color: white;
+}   
+
+.nav-link i:hover {
+	opacity: .5;
+	border-radius: 0;
+} 
+
+.fa-user-check {
+  color:  rgb(14, 97, 79);
+  background-color: white;
+  font-size: medium;
+}   
+
+.fa-sign-out {
+  color: rgb(92, 9, 9);
+}
+
+/* !! social media query!! */
+@media only screen and (max-width: 340px) {
+  
+  .nav-bar{
+    display: block;
+    text-align: center;
+  }
+  
+  .bottom-nav-bar {
+      align-items: center;
+      float: right;
+      background-color: #15243c;
+      justify-content:space-evenly;
+      min-width: 100%;
+      
+    }
+
+}
+
+/* social media ends*/

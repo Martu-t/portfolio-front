@@ -1,0 +1,64 @@
+circle-progress {
+    align-items:center;
+    text-align: left;
+}
+
+.btn-edit {
+    float:right;
+ }
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin-bottom: 50px;
+}
+
+span {
+    margin: 20px 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 36px;
+    color: #5a61bd;
+    text-align: left;
+    /*padding: 0px 25px;*/
+    margin: 0;
+    float: left;
+}
+
+.conteiner{
+    padding: 25px 0px;
+ }
+
+ .modal-title {
+    color: black;
+    text-align: center;
+  }
+  label {
+    color: #3f48c5;
+   }
+
+ @media screen and (max-width: 800px) {
+    .row{
+      grid-template-columns: 1fr 1fr;
+    }
+    }
+
+@media screen and (max-width: 450px) {
+    .row{
+        grid-template-columns: 1fr;
+    }
+    .btn-edit {
+        float: left;
+    }
+    } 
+
+    @media only screen and (max-width: 400px) {
+        h2 {
+          font-size: 30px;
+          text-align: left;
+          padding: auto 0px;
+        }
+    }   

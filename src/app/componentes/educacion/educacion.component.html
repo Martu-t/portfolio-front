@@ -1,0 +1,197 @@
+<!-- START EDUCACION-->
+<div class="conteiner">
+  <div>
+    <h2> {{componente4}} </h2>
+  </div>
+  <!--START: AGREGAR EDUCACION-->
+  <!--Boton Agregar-->
+
+  <div>
+    <button *ngIf="isUserLogged" type="button" class="mx-5 btn btn-primary" data-bs-toggle="modal"
+      data-bs-target="#miModalEdu"> AGREGAR
+    </button>
+  </div>
+</div>
+<!--START: FORMULARIO AGREGAR-->
+<!--headmodall-->
+<div class="modal fade" id="miModalEdu" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+  data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!--Modal Header-->
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"> Agrega Educación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!--Modal Body-->
+      <div class="modal-body">
+
+        <!--form-->
+        <form #editForm="ngForm" (ngSubmit)="addEdu(editForm)" class="text-center border border-light p-5">
+
+          <!-- Nombre Carrera -->
+          <label>Carrera</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="nombre_carrera" name="nombre_carrera"
+            [(ngModel)]="educacionNueva.nombre_carrera" id="nombre_carrera" required>
+
+          <!--PNombre instituto -->
+          <label>Institución</label>
+          <input type="text" class="form-control" class="form-control mb-4" for="nombre_instituto"
+            name="nombre_instituto" [(ngModel)]="educacionNueva.nombre_instituto" id="nombre_instituto" required>
+
+          <!-- Fecha inicio -->
+          <label>Fecha de comienzo</label>
+          <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="form-control mb-4" class="form-control"
+            required name="fecha_inicio" id="fecha_inicio_edu" [(ngModel)]="educacionNueva.fecha_inicio"
+            min="1960-01-01" [max]="educacionNueva.fecha_fin">
+
+          <br>
+          <!-- Fecha fin -->
+          <label>Fecha de fin</label>
+          <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="form-control mb-4" class="form-control"
+            required name="fecha_fin" id="fecha_fin_edu" [(ngModel)]="educacionNueva.fecha_fin"
+            [min]="educacionNueva.fecha_inicio">
+
+          <!-- Foto de la institucion-->
+          <!-- <label for="url_foto_edu">Url de la foto de la institucion</label>
+          <input type="text" class="form-control" class="form-control mb-4" [(ngModel)]="educacionNueva.url_foto_edu"
+            name="url_foto_edu" id="url_foto_edu"> -->
+
+          <!--Id persona-->
+          <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona"
+            [(ngModel)]="educacionNueva.persona_idpersona" disabled style="display: none;" class="form-control mb-4">
+
+
+        </form>
+      </div>
+
+      <!--Modal Footer-->
+      <div class="modal-footer">
+        <!--<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">-->
+        <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+        <button (click)="crearEducacion()" [disabled]="editForm.invalid" type="submit" class="btn btn-success"
+          data-bs-dismiss="modal"> Agregar
+          Educacion</button>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--END: FORMULARIO AGREGAR-->
+
+<br>
+<!--LISTA DE EDUCACION-->
+<div class="conteiner">
+  <div class="items-list">
+
+    <span *ngFor="let edu of educacionLista">
+
+      <!--START MODIFICAR EDUCACION-->
+      <div class="titulo-boton">
+        <h3> {{edu.nombre_carrera}} </h3>
+
+
+
+        <!--Siguiente botton: Editar-->
+        <!--BOTTON-->
+
+        <!--START: EDITAR EDUCACION-->
+        <!--botton: Editar-->
+        <div class="btn-edit">
+          <a *ngIf="isUserLogged" class="btn-right" data-bs-toggle="modal" data-bs-target="#miModalEditEdu"
+            (click)="recuEducacion(edu.ideducacion)" class="btn-right"><i class="fa fa-pen" id="edit-edu"></i></a>
+        </div>
+
+        <!--headmodall-->
+        <div class="modal fade" id="miModalEditEdu" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+          data-bs-backdrop="static">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <!--Modal Header-->
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalEditExp"> Editar Educacion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <!--Modal Body-->
+              <div class="modal-body">
+
+                <!--form-->
+                <form #editForm="ngForm" (ngSubmit)="addEdu(editForm)" class="text-center border border-light p-5">
+                  <!--id para pasar-->
+                  <input type="hidden" ngModel={{educacionModificada.ideducacion}} name="ideducacion"
+                    class="form-control">
+                  <div>
+                    <!--Nombre Carrera-->
+                    <label>Carrera</label>
+                    <input type="text" class="form-control" class="form-control mb-4" for="nombre_carrera_modificada"
+                      name="nombre_carrera_modificada" [(ngModel)]="educacionModificada.nombre_carrera"
+                      id="nombre_carrera_modificada" required placeholder="Nombre de la carrera">
+                  </div>
+
+                  <!--Instituto-->
+                  <div>
+                    <label>Institución</label>
+                    <input type="text" class="form-control" class="form-control mb-4" for="nombre_instituto"
+                      name="nombre_instituto" [(ngModel)]="educacionModificada.nombre_instituto" id="nombre_instituto"
+                      required placeholder="Nombre de la institución">
+                  </div>
+
+                  <!-- Fecha inicio -->
+                  <div>
+                    <label>Fecha de inicio</label>
+                    <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="form-control mb-4"
+                      class="form-control" name="fecha_inicio" id="fecha_inicio"
+                      [(ngModel)]="educacionModificada.fecha_inicio" [max]="educacionModificada.fecha_fin"
+                      min="1960-01-01">
+                  </div>
+                  <br>
+
+                  <!-- Fecha fin -->
+                  <div>
+                    <label>Fecha de fin</label>
+                    <input type="date" required pattern="\d{4}-\d{2}-\d{2}" class="form-control mb-4"
+                      class="form-control" name="fecha_fin" id="fecha_fin" [(ngModel)]="educacionModificada.fecha_fin"
+                      [min]="educacionModificada.fecha_inicio">
+                  </div>
+                  <br>
+                  <!--ID PERSONA-->
+                  <input type="number" for="persona_idpersona" name="persona_idpersona" id="persona_idpersona1"
+                    [(ngModel)]="educacionModificada.persona_idpersona" class="form-control mb-4"
+                    placeholder="persona_idpersona" disabled style="display: none;">
+
+
+                </form>
+              </div>
+
+              <!--Modal Footer-->
+
+              <button type="button" class="left btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+              <button (click)="modificarEducacion(educacionModificada.ideducacion)" [disabled]="editForm.invalid"
+                type="submit" class="btn btn-success" data-bs-dismiss="modal"> Editar Educacion</button>
+
+            </div>
+
+          </div>
+        </div>
+
+        <!---FINISH: EDITAR EDUCACION-->
+
+        
+        <!--START: ELIMINAR EXPERIENCIA-->
+        <!--boton: Eliminar-->
+        <div class="btn-edit">
+          <a class="btn-right" *ngIf="isUserLogged" (click)="borrarEducacion(edu.ideducacion)"><i class="fa fa-trash"
+              id="delete"></i> </a>
+        </div>
+        <!-- FINISH: ELIMINAR EXPERIENCIA-->
+      </div>
+
+
+      <h4> {{edu.nombre_instituto}} </h4>
+      <p> {{edu.fecha_inicio | date: 'MMM yyyy'}} - {{edu.fecha_fin | date: 'MMM yyyy' }} </p>
+   
+    </span>
+  </div>
+</div>
