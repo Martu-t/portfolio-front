@@ -6,6 +6,8 @@ Plese note tha this has an editable version - You can loggin clicking the user i
 
 Please request the credentials to the owner of this repository.
 
+** SPANISH INFO AT WIKI FOLDER **
+
 # Portafolio to change
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.3.
